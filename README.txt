@@ -27,7 +27,7 @@ could be used by an independent hairdresser.
 
 - Module pre-requisites are in requirements.txt
 - Opening the project in PyCharm should prompt for modules from the requirements.txt to be installed
-- Alternatively use pip install requirements.txt in the command line
+- Alternatively, use "python -m pip install -r requirements.txt" in the command line in the same directory as the requirements.txt file.
 - Should there be trouble upgrading pip in the venv (e.g. to ver. 19.03.3) try:
 	python -m pip install -U --force-reinstall pip
 

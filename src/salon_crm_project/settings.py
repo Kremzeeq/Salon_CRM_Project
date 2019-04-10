@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'salon_crm_base.apps.SalonCrmBaseConfig',
     'django.contrib.admin',
-    'phonenumber_field',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
