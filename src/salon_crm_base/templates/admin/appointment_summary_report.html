@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div id="content" class="flex">
+ <h1>Appointment Summary Report</h1>
+ {% if appointment_summary %}
+ <table id="result_list">
+  <thead>
+  <tr>
+   <th>Date</th>
+   <th>No. of Appointments</th>
+   <th>Income Paid</th>
+   <th>Forecasted Income</th>
+   <th>Timeslots Available</th>
+  </tr>
+  </thead>
+  {% for day in appointment_summary %}
+   <tr>
+    <td>{{ day.date }}</td>
+    <td>{{ day.count }}</td>
+    <td>{{ day.paid_income }}</td>
+    <td>{{ day.forecasted_income }}</td>
+    <td>{{ day.time_slots_available }}</td>
+   </tr>
+  {% endfor %}
+
+ </table>
+{% else %}
+
+<p>No appoinments scheduled</p>
+{% endif %}
+</div>
+
+{% endblock %}
