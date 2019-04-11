@@ -110,21 +110,6 @@ class Appointment(models.Model):
     def __str__(self):
         return "Appointment " + str(self.date) + ", @" + str(self.start_time)[:-2]
 
-    def clean(self):
-        self.validate_appointment_time()
-
-    def validate_appointment_time(self):
-        # As self.services cannot be consulted until model has been saved, check whether the model has been saved.
-        # This is a temp fix because not evaluating services for the current change, only the previous change.
-        if self.id is None:
-            return False
-        if self.date != None and self.start_time != None:
-            appointment_util = AppointmentUtil(self.services.all(), self.start_time)
-            self.end_time = appointment_util.end_time
-            check_no_appointment_clashes(self.id, self.date, self.start_time, self.end_time)
-            return True
-        return False
-
     def save(self, *args, **kwargs):
         """
         First super save necessary without force insert so appointment obj
