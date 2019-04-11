@@ -94,6 +94,7 @@ class GenericTestCase(TestCase):
                                                                start_time=datetime.time(11, 0),
                                                                customer=self.customer_1)
         self.appointment_1.services.add(self.service_1)
+        self.appointment_1.save()
 
 
 class AppointmentTestCase(GenericTestCase):
@@ -103,43 +104,15 @@ class AppointmentTestCase(GenericTestCase):
     python manage.py test salon_crm_base.tests.AppointmentTestCase
     """
 
-    def test_clean_updates_end_time(self):
-        self.appointment_1.clean()
-        self.assertEqual(self.appointment_1.end_time, datetime.time(11, 40))
-
     def test_validate_appointment_time_with_one_service(self):
-        self.appointment_1.validate_appointment_time()
         self.assertEqual(self.appointment_1.end_time, datetime.time(11, 40))
 
     def test_validate_appointment_time_with_two_services(self):
         self.appointment_1.services.add(self.service_2)
-        self.appointment_1.validate_appointment_time()
+        self.appointment_1.save()
         self.assertEqual(self.appointment_1.end_time, datetime.time(12, 30))
 
-    def test_validate_appointment_time_with_clash(self):
-        self.appointment_1.validate_appointment_time()
-        self.appointment_1.save()
-        self.appointment_2 = models.Appointment.objects.create(date=self.date,
-                                                               start_time=datetime.time(11, 0),
-                                                               customer=self.customer_1)
-        self.appointment_2.services.add(self.service_1)
-        with self.assertRaises(ValidationError):
-            self.appointment_2.validate_appointment_time()
-
-    def test_validate_same_day_appointment_time_with_no_clash(self):
-        self.appointment_1.validate_appointment_time()
-        self.appointment_1.save()
-        self.appointment_2 = models.Appointment.objects.create(date=self.date,
-                                                               start_time=datetime.time(11, 40),
-                                                               customer=self.customer_1)
-        self.appointment_2.services.add(self.service_1)
-        self.appointment_2.validate_appointment_time()
-        self.appointment_2.save()
-        self.assertNotEqual(self.appointment_1.end_time, self.appointment_2.end_time)
-        self.assertNotEqual(self.appointment_1.start_time, self.appointment_2.start_time)
-
     def test_validate_quote_updates_upon_saving(self):
-        self.appointment_1.validate_appointment_time()
         self.appointment_1.save()
         self.assertEqual(self.appointment_1.quote, 40)
 
@@ -154,13 +127,11 @@ class AppointmentReportMakerTestCase(GenericTestCase):
 
     def setUp(self):
         super(AppointmentReportMakerTestCase, self).setUp()
-        self.appointment_1.validate_appointment_time()
         self.appointment_1.save()
         self.appointment_2 = models.Appointment.objects.create(date=self.date,
                                                                start_time=datetime.time(11, 40),
                                                                customer=self.customer_1)
         self.appointment_2.services.add(self.service_1)
-        self.appointment_2.validate_appointment_time()
         self.appointment_2.save()
         self.appointment_report_maker = models.AppointmentReportMaker()
 
