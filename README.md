@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="src/static/img/salon_crm_app.jpg" alt="Salon CRM Logo" />
+  <img src="https://github.com/Kremzeeq/Salon_CRM_Project/blob/master/static/img/salon_crm_app.jpg" alt="Salon CRM Logo" />
 </h1>
 
 This **Salon CRM** app is a appointment booking platform, structured as a Django and REST API application.
