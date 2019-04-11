@@ -49,9 +49,14 @@ could be used by an independent hairdresser.
 - The CRM system would be available via the <a href="http://127.0.0.1:8000/admin">admin</a>
 	
 
-**Demo**
+**Application Overview Pdf: User Journeys**
 
-MediaBudgieDemo.pptx in GitHub provides a prototype of the application and similuates a business user journey for setting up central budgets
--Please view business user journey for the Media Budgie Application here:
+A <a href="https://github.com/Kremzeeq/Salon_CRM_Project/blob/master/Salon_CRM_app_overview.pdf">Salon CRM app overview is available in pdf on GitHub</a> to provide guidance on using the application, in terms of basic user journeys.
+
+## Know Issues
+
+- Additional Features for development:
+	- Appointment Detail View to provide warning to end user if appointment start time conflicts with another appointment
+	- Appointment Summary Report to provide filter to view appointments e.g. by date
 
 
